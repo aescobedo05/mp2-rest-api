@@ -28,7 +28,7 @@ class DatasetStorage:
         if item is None:
             logger.debug("Dataset not found: id=%s", dataset_id)
             return None
-        logger.debug("Retrieved dataset: id=%s", dataset_id)
+        logger.debug("Retrieved dataset: id=%s, rows=%s", dataset_id, len(item["data"]))
 
         return item['data'].copy()
 
@@ -38,7 +38,7 @@ class DatasetStorage:
         if item is None:
             logger.debug("Dataset not found: id=%s", dataset_id)
             return None
-        logger.debug("Retrieved dataset: id=%s", dataset_id)
+        logger.debug("Retrieved dataset copy: id=%s", dataset_id)
 
         df = item["data"]
 
@@ -63,7 +63,7 @@ class DatasetStorage:
             return False
 
         item["data"] = df
-        logger.debug("Dataset replaced")
+        logger.debug("Updated dataset: id=%s, rows=%s", dataset_id, len(item["data"]))
         return True
 
 
@@ -72,4 +72,3 @@ class DatasetStorage:
         self._store.clear()
         self._counter = 0
         logger.debug("All data cleared")
-
